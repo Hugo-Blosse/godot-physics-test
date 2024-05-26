@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvybunept5uis"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2mfrw"]
+
+[node name="RopePart2" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2mfrw")
+
+[node name="PJ" type="PinJoint2D" parent="."]

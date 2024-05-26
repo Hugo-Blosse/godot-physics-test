@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://cha8rf2rp3kby"]
+
+[ext_resource type="Texture2D" uid="uid://puc10aemwar4" path="res://icon.svg" id="1_fgq3u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hr1l3"]
+
+[node name="Rope" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(100, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("1_fgq3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_hr1l3")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="StaticBody2D"]
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(103, 30)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("1_fgq3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+shape = SubResource("CircleShape2D_hr1l3")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="RigidBody2D2"]
+node_a = NodePath("../../RigidBody2D")
+node_b = NodePath("..")
+length = 10.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(40, 37)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("1_fgq3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_hr1l3")
