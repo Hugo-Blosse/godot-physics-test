@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtf8kkeeswmir"]
+
+[ext_resource type="Texture2D" uid="uid://puc10aemwar4" path="res://icon.svg" id="1_gjjhj"]
+[ext_resource type="Script" path="res://rope_part_12.gd" id="1_k0wvu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lm46i"]
+
+[node name="RopePart1" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_k0wvu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lm46i")
+
+[node name="PJ" type="PinJoint2D" parent="."]
+position = Vector2(10, 0)
+node_a = NodePath("..")
+node_b = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_gjjhj")

@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq7gk8uuom114"]
+
+[ext_resource type="Script" path="res://VectorCalculator.gd" id="1_a8gb8"]
+
+[node name="VectorCalculator" type="Control"]
+layout_mode = 3
+anchor_right = 0.314
+anchor_bottom = 0.347
+offset_right = 0.271973
+offset_bottom = 0.143997
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a8gb8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.32549, 0.32549, 0.32549, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 12.0
+offset_right = 343.0
+offset_bottom = 213.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Vector Calculator"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label2" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Enter vectors ex. (0,1) + (2,1)"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Seperate vectors using \"+\""
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Label3" type="Label" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Calculated vector = "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Calculate"
+
+[connection signal="text_submitted" from="ColorRect/MarginContainer/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="calculate_vector"]

@@ -7,4 +7,4 @@
 script = ExtResource("1_sgbw4")
 
 [node name="Rope" parent="." instance=ExtResource("1_gs05i")]
-position = Vector2(190, 29)
+position = Vector2(190, 100)

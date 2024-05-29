@@ -3,16 +3,25 @@
 [ext_resource type="Script" path="res://rope_part.gd" id="1_7mqni"]
 [ext_resource type="Texture2D" uid="uid://puc10aemwar4" path="res://icon.svg" id="1_t158d"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rp71v"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfsuu"]
+size = Vector2(20, 15)
 
 [node name="RigidBody2D" type="RigidBody2D"]
+collision_mask = 2
+mass = 0.01
+linear_damp = 1.0
+angular_damp = 1.0
 script = ExtResource("1_7mqni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_rp71v")
-
-[node name="PJ" type="PinJoint2D" parent="."]
+shape = SubResource("RectangleShape2D_dfsuu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.14, 0.14)
+position = Vector2(0, -7.15256e-07)
+scale = Vector2(0.14, 0.125)
 texture = ExtResource("1_t158d")
+
+[node name="PJ" type="PinJoint2D" parent="."]
+position = Vector2(10, 0)
+bias = 0.288
+softness = 1.17
