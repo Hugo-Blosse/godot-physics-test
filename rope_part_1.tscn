@@ -12,11 +12,13 @@ script = ExtResource("1_k0wvu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lm46i")
 
-[node name="PJ" type="PinJoint2D" parent="."]
-position = Vector2(10, 0)
-node_a = NodePath("..")
-node_b = NodePath("..")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_gjjhj")
+
+[node name="Rotation" type="Node2D" parent="."]
+
+[node name="PJ" type="PinJoint2D" parent="Rotation"]
+position = Vector2(10, 0)
+node_a = NodePath("../..")
+node_b = NodePath("../..")

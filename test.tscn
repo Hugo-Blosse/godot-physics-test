@@ -1,10 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm6edssnsvqga"]
+[gd_scene load_steps=6 format=3 uid="uid://dm6edssnsvqga"]
 
 [ext_resource type="PackedScene" uid="uid://cha8rf2rp3kby" path="res://rope.tscn" id="1_gs05i"]
 [ext_resource type="Script" path="res://test.gd" id="1_sgbw4"]
+[ext_resource type="Texture2D" uid="uid://puc10aemwar4" path="res://icon.svg" id="4_cdim4"]
+[ext_resource type="PackedScene" uid="uid://b65tepsc53jqg" path="res://ball.tscn" id="4_hv5p2"]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_l4jw1"]
 
 [node name="test" type="Node2D"]
 script = ExtResource("1_sgbw4")
 
 [node name="Rope" parent="." instance=ExtResource("1_gs05i")]
 position = Vector2(190, 100)
+
+[node name="Ball" parent="." instance=ExtResource("4_hv5p2")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(20, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SeparationRayShape2D_l4jw1")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("4_cdim4")

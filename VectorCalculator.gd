@@ -2,8 +2,9 @@ extends Control
 
 
 @onready var line_edit : LineEdit = $ColorRect/MarginContainer/VBoxContainer/LineEdit
-
 @onready var answear : Label = $ColorRect/MarginContainer/VBoxContainer/Label3
+
+
 var vectors_values_1 : Array = []
 var vectors_values_2 : Array = []
 
@@ -19,6 +20,9 @@ func calculate_vector():
 	for val in vectors_values_1.size():
 		vector += Vector2(vectors_values_1[val], vectors_values_2[val])
 	answear.text = str("Calculated vector = ", vector)
+	vector = Vector2.ZERO
+	vectors_values_1 = []
+	vectors_values_2 = []
 
 
 func _on_line_edit_text_submitted(new_text):

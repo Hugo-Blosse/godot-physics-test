@@ -16,6 +16,8 @@ shape = SubResource("CircleShape2D_2mfrw")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_cdvue")
 
-[node name="PJ" type="PinJoint2D" parent="."]
+[node name="Rotation" type="Node2D" parent="."]
+
+[node name="PJ" type="PinJoint2D" parent="Rotation"]
 position = Vector2(-10, 0)
-node_b = NodePath("..")
+node_b = NodePath("../..")
