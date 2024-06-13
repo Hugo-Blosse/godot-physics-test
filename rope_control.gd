@@ -16,7 +16,8 @@ func create_rope(rope_starting_position : Vector2, rope_final_position : Vector2
 		return
 	rope_start_part.global_position = rope_starting_position
 	rope_start_part.get_node("Rotation/PJ").node_a = rope_start_part.get_path()
-	rope_final_part.global_position = rope_final_position
+	if rope_final_part.get_class() == "RopeEndPart":
+		rope_final_part.global_position = rope_final_position
 	start_angle = (rope_final_position - rope_starting_position).angle()
 	rope_start_part.get_node("Rotation").rotation = start_angle
 	rope_final_part.get_node("Rotation").rotation = start_angle
@@ -53,3 +54,8 @@ func create_rope_part(last_part) -> RigidBody2D:
 func rope_breaks(id : int) -> void:
 	if id != rope_parts[-1].id:
 		rope_parts[id+1].broken = true
+
+
+# TODO make rope stronger
+# TODO multiple layer rope
+# OPTIMIZE rope physics

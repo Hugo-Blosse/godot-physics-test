@@ -5,7 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://puc10aemwar4" path="res://icon.svg" id="4_cdim4"]
 [ext_resource type="PackedScene" uid="uid://b65tepsc53jqg" path="res://ball.tscn" id="4_hv5p2"]
 
-[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_l4jw1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_sa45l"]
+radius = 60.0
 
 [node name="test" type="Node2D"]
 script = ExtResource("1_sgbw4")
@@ -15,11 +16,12 @@ position = Vector2(190, 100)
 
 [node name="Ball" parent="." instance=ExtResource("4_hv5p2")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="TEts" type="StaticBody2D" parent="."]
 position = Vector2(20, 20)
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("SeparationRayShape2D_l4jw1")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="TEts"]
 texture = ExtResource("4_cdim4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TEts"]
+shape = SubResource("CircleShape2D_sa45l")

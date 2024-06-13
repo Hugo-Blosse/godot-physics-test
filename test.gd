@@ -14,7 +14,7 @@ var rope_preview
 
 func _input(event):
 	if Input.is_action_just_pressed("start"):
-		if rope_preview:
+		if is_instance_valid(rope_preview):
 			rope_preview.queue_free()
 		starting_position = get_viewport().get_mouse_position()
 		rope_preview = RopePartStart.instantiate()
@@ -39,25 +39,32 @@ func _input(event):
 			final_position = get_viewport().get_mouse_position()
 			var closest_object = rope_preview
 			for child in get_children():
-				if (child.get_class() != "Node2D" && child.get_class() != "Control") && final_position.distance_to(child.global_position) < final_position.distance_to(closest_object.global_position):
-					closest_object = child
+				if is_instance_valid(child):
+					if (child.get_class() != "Node2D" && child.get_class() != "Control") && final_position.distance_to(child.global_position) < final_position.distance_to(closest_object.global_position):
+						closest_object = child
 			var rope = RopeControl.instantiate()
 			add_child(rope)
 			remove_child(rope_preview)
 			var rope_start_part = RopePartStart.instantiate()
 			rope.add_child(rope_start_part)
 			rope_start_part.global_position = starting_position
+			var query = PhysicsRayQueryParameters2D.create(starting_position, closest_object.global_position)
+			var collision = get_world_2d().direct_space_state.intersect_ray(query)
+			if !collision:
+				return
 			var rot = Node2D.new()
 			rot.name = "Rotation"
 			rot.global_position = closest_object.global_position
+			var final_position = closest_object.global_position
 			var pj = PinJoint2D.new()
 			pj.name = "PJ"
 			rot.add_child(pj)
-			pj.global_position = rot.global_position
 			closest_object.add_child(rot)
 			remove_child(closest_object)
 			rope.add_child(closest_object)
-			rope.create_rope(starting_position, closest_object.global_position, rope_start_part, closest_object)
+			closest_object.global_position = final_position
+			rope.create_rope(starting_position, collision.position, rope_start_part, closest_object)
+			pj.global_position = collision.position
 			starting_position = Vector2.ZERO
 	if Input.is_action_just_pressed("clear"):
 		starting_position = Vector2.ZERO
@@ -67,3 +74,8 @@ func _input(event):
 		var ball = Ball.instantiate()
 		ball.global_position = get_viewport().get_mouse_position()
 		add_child(ball)
+
+
+# TODO stationary object for rope attachment
+# TODO object that starts stationary and can start moving later
+# TODO rope stretching with mouse
