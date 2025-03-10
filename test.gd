@@ -1,6 +1,9 @@
 extends Node2D
 
 
+@onready var player = $Player
+
+
 var RopeControl = preload("res://rope_control.tscn")
 var RopePartStart = preload("res://rope_part_1.tscn")
 var RopePartFinal = preload("res://rope_part_2.tscn")
@@ -16,13 +19,13 @@ func _input(event):
 	if Input.is_action_just_pressed("start"):
 		if is_instance_valid(rope_preview):
 			rope_preview.queue_free()
-		starting_position = get_viewport().get_mouse_position()
+		starting_position = get_global_mouse_position()
 		rope_preview = RopePartStart.instantiate()
 		rope_preview.global_position = starting_position
 		add_child(rope_preview)
 	if Input.is_action_just_pressed("finish"):
 		if starting_position != Vector2.ZERO:
-			final_position = get_viewport().get_mouse_position()
+			final_position = get_global_mouse_position()
 			var rope = RopeControl.instantiate()
 			add_child(rope)
 			remove_child(rope_preview)
@@ -36,7 +39,7 @@ func _input(event):
 			starting_position = Vector2.ZERO
 	if Input.is_action_just_pressed("add_rope"):
 		if starting_position != Vector2.ZERO:
-			final_position = get_viewport().get_mouse_position()
+			final_position = get_global_mouse_position()
 			var closest_object = rope_preview
 			for child in get_children():
 				if is_instance_valid(child):
@@ -44,13 +47,14 @@ func _input(event):
 						closest_object = child
 			var rope = RopeControl.instantiate()
 			add_child(rope)
-			remove_child(rope_preview)
+			rope_preview.queue_free()
 			var rope_start_part = RopePartStart.instantiate()
 			rope.add_child(rope_start_part)
 			rope_start_part.global_position = starting_position
 			var query = PhysicsRayQueryParameters2D.create(starting_position, closest_object.global_position)
 			var collision = get_world_2d().direct_space_state.intersect_ray(query)
 			if !collision:
+				starting_position = Vector2.ZERO
 				return
 			var rot = Node2D.new()
 			rot.name = "Rotation"
@@ -72,7 +76,7 @@ func _input(event):
 			children.queue_free()
 	if Input.is_action_just_pressed("ball"):
 		var ball = Ball.instantiate()
-		ball.global_position = get_viewport().get_mouse_position()
+		ball.global_position = get_global_mouse_position()
 		add_child(ball)
 
 

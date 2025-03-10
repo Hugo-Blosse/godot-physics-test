@@ -9,7 +9,7 @@ var rope_parts = []
 var start_angle : float = 0.0
 
 
-func create_rope(rope_starting_position : Vector2, rope_final_position : Vector2, rope_start_part : StaticBody2D, rope_final_part : StaticBody2D) -> void:
+func create_rope(rope_starting_position : Vector2, rope_final_position : Vector2, rope_start_part : StaticBody2D, rope_final_part) -> void:
 	var distance = rope_starting_position.distance_to(rope_final_position)
 	var rope_length = round(distance/rope_part_length)
 	if rope_length < 1:
@@ -33,6 +33,8 @@ func create_rope(rope_starting_position : Vector2, rope_final_position : Vector2
 	rope_final_part.get_node("Rotation/PJ").node_a = rope_parts[-1].get_path()
 	rope_parts[-1].get_node("PJ").node_a = rope_parts[-1].get_path()
 	rope_parts[-1].connected_part = rope_final_part
+	if rope_final_part is Player:
+		rope_final_part.connected_rope_part = rope_parts[-1]
 
 
 func create_rope_part(last_part) -> RigidBody2D:
